@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+    <div id="aplicacionVue">
+        Varible nuevo nombre: {{ nuevonombre }}
+        <br>
+        <input type="text" v-model="nuevonombre">
+        <h1 v-if="mostrar">Lista personas</h1>
+        <h2 v-for="nombre in listanombres">
+            {{nombre}}
+        </h2>
+        <button v-on:click="incrementa">Incrementa contador</button>
+
+    </div>
+</body>
+</html>
