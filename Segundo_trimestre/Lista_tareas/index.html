@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Lista Tareas</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="nuevaTarea">
+        <button v-on:click="agregar">Añade tarea</button>
+        <h1 v-if="mostrar">Lista de tareas</h1>
+        <ol>
+            <li v-for="tarea in listaTareas" v-bind:id="tarea" v-on:click="completar">{{ tarea }}</li>
+        </ol>
+        <h3 v-if="mostrar">Tienes {{listaTareas.length}} tareas pendientes y {{tareasCompletadas.length}} completadas</h3>
+        </div>
+</body>
+</html>
