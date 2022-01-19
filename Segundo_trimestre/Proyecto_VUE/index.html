@@ -9,21 +9,24 @@
     <script src="index.js"></script>
 </head>
 <body>
-    <input type="text" v-model="tarea" v-on:keyup.espace="agregar">
-    <select v-model="prioridad">
+    <input type="text" v-model="tarea" v-on:keyup.enter="agregar">
+    <select v-model="prioridad" required>
         <option disabled value="">-----</option>
         <option>Alta</option>
         <option>Media</option>
         <option>Baja</option>
     </select>
-    <p>{{prioridad}}</p>
     <div v-if="this.listaTareas.length">
         <h1>Tareas por hacer</h1>
         <ul>
-            <li v-for="(tarea, index) in listaTareas" v-on:click="completado">
-
+            <li v-for="(tarea, index) in listaTareas" :key="index">
+                Tarea {{tarea.nombre}} completada:{{this.completada}}<br>
+                Prioridad: {{tarea.prioridad}} <button v-on:click="completar(index)">Marcar</button>
+                <button v-on:click="borrar(index)">Borrar</button>
             </li>
         </ul>
+        <button @click="borrarCompletadas">Borrar completadas</button>
+        <h4>Tienes {{listaTareas.length}} tareas, de las cuales {{incompletos}} están pendientes</h4>
     </div>
 </body>
 </html>
