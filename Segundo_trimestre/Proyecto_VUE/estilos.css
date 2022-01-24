@@ -1,0 +1,36 @@
+body{
+    text-align: center;
+    background: url('imagenes/tareas.jpg');
+    color: white;
+}
+
+header{
+    height: 200px;
+    width: 100%;
+}
+
+header img{
+    height: 200px;
+    width: 85%;
+    border-radius: 20px;
+}
+
+#introducir{
+    background: coral;
+}
+
+div #introducir{
+    margin-bottom: 20px;
+}
+
+div ul{
+    list-style: none;
+}
+
+div ul li #marcador{
+    border-radius: 50%;
+}
+
+.footer{
+    background: darkblue;
+}

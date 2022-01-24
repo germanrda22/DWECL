@@ -14,16 +14,19 @@ const tareas = {
     },
     methods:{
         agregar(){
-            this.listaTareas.push(
-                {
-                    nombre: this.tarea,
-                    fecha: new Date(),
-                    prioridad: this.prioridad,
-                    estado:false
-                }
-            );
-            this.tarea = '';
-
+            if (this.tarea && this.prioridad){
+                this.listaTareas.push(
+                    {
+                        nombre: this.tarea,
+                        fecha: new Date(),
+                        prioridad: this.prioridad,
+                        estado:false
+                    }
+                );
+                this.tarea = '';
+                this.prioridad = '';
+                this.updateLocalStorage()
+            }
         },
         completar(index){
             this.listaTareas[index].estado = !this.listaTareas[index].estado;
@@ -46,6 +49,32 @@ const tareas = {
             });
             this.listaTareas = arr;
             this.updateLocalStorage();
+        },
+        mostrarCompletadas(){
+            this.tareas = JSON.parse(localStorage.all);
+            let completas = [];
+            this.tareas.forEach(tarea =>{
+                if(tarea.estado){
+                    completas.push(tarea);
+                }
+                this.listaTareas = completas;
+            })
+        },
+        mostrarIncompletadas(){
+            this.tareas = JSON.parse(localStorage.all);
+            let incompletas = [];
+            this.tareas.forEach(tarea =>{
+                if(!tarea.estado){
+                    incompletas.push(tarea);
+                }
+                this.listaTareas = incompletas;
+            })
+        },
+        mostrarTodos(){
+            this.listaTareas = JSON.parse(localStorage.all);
+        },
+        borrarTodas(){
+            this.listaTareas = [];
         }
     },
     computed:{

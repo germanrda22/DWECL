@@ -7,25 +7,45 @@
     <title>Lista tareas</title>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="index.js"></script>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-    <input type="text" v-model="tarea" v-on:keyup.enter="agregar">
-    <select v-model="prioridad" required>
-        <option disabled value="">-----</option>
-        <option>Alta</option>
-        <option>Media</option>
-        <option>Baja</option>
-    </select>
+    <header><img src="imagenes/lista-de-tareas.jpg"></header>
+    <div class="introducir">
+        <h1>Introduce una tarea</h1>
+
+        <label>Nombre de la tarea:</label>
+        <input type="text" v-model="tarea" v-on:keyup.enter="agregar">
+
+        &nbsp;&nbsp;
+        <label for="prioridad">Prioridad:</label>
+        <select v-model="prioridad">
+            <option disabled value="">-----</option>
+            <option>Alta</option>
+            <option>Media</option>
+            <option>Baja</option>
+        </select>
+
+        &nbsp;
+        <button v-bind:disabled="prioridad=='' || tarea==''" v-on:click="agregar" id="anadir">Añadir</button>
+    </div>
     <div v-if="this.listaTareas.length">
         <h1>Tareas por hacer</h1>
         <ul>
             <li v-for="(tarea, index) in listaTareas" :key="index">
-                Tarea {{tarea.nombre}} completada:{{this.completada}}<br>
-                Prioridad: {{tarea.prioridad}} <button v-on:click="completar(index)">Marcar</button>
+                <button class="marcador" v-on:click="completar(index)">Marcar</button>
+                {{tarea.nombre}}<br>
+                Prioridad: {{tarea.prioridad}} <br>
                 <button v-on:click="borrar(index)">Borrar</button>
             </li>
         </ul>
+    </div>
+    <div id="footer">
+        <button @click="mostrarCompletadas">Tareas completadas</button>
+        <button @click="mostrarIncompletadas">Tareas incompletadas</button>
+        <button @click="mostrarTodos">Mostrar todas</button><br>
         <button @click="borrarCompletadas">Borrar completadas</button>
+        <button @click="borrarTodas">Eliminar todas</button>
         <h4>Tienes {{listaTareas.length}} tareas, de las cuales {{incompletos}} están pendientes</h4>
     </div>
 </body>
